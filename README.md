@@ -43,6 +43,8 @@ node bot.js
 ```
 Bot will attempt to connect to Discord servers and will be listening continuously.
 
+Bot is using local SQLite database that get's created when the bot is started for the first time. If you want to reset the database, delete database.sqlite file and restart your bot.
+
 If you have any problems, feel free to get in touch with me.
 
 Pull requests are welcome.
