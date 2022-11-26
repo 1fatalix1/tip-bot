@@ -1,0 +1,14 @@
+{
+	"NODE_TOKEN_MAINNET": "",
+	"NODE_ENDPOINT_MAINNET": "https://node.algoexplorerapi.io",
+	"NODE_PORT_MAINNET": 443,
+	"INDEXER_TOKEN_MAINNET": "",
+	"INDEXER_ENDPOINT_MAINNET": "https://algoindexer.algoexplorerapi.io",
+	"INDEXER_PORT_MAINNET": 443,
+	"NODE_TOKEN_TESTNET": "",
+	"NODE_ENDPOINT_TESTNET": "https://node.testnet.algoexplorerapi.io",
+	"NODE_PORT_TESTNET": 443,
+	"INDEXER_TOKEN_TESTNET": "",
+	"INDEXER_ENDPOINT_TESTNET": "https://algoindexer.testnet.algoexplorerapi.io",
+	"INDEXER_PORT_TESTNET": 443
+}
