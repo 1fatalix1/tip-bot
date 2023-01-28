@@ -66,7 +66,7 @@ function setTipAddress(network) {
 		);
 		tipAccount = process.env.TIP_ACCOUNT_MAINNET;
 		tipAsset = parseInt(process.env.TIP_ASSET_MAINNET);
-		tipAssetMultiplier = parseInt(process.env.TIP_ASSET_MAINNET);
+		tipAssetMultiplier = parseInt(process.env.TIP_ASSET_MULTIPLIER_MAINNET);
 	}
 }
 
