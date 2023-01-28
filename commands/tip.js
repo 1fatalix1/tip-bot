@@ -143,23 +143,23 @@ module.exports = {
 			return;
 		}
 		const receiverWallet = usersConfigReceiver.walletAddress;
-		const receiverBalance = balances.find(x => x.address === receiverWallet);
-		if (!receiverBalance) {
+		try {
+			let createClawbackTransactionTx = await createClawbackTransaction(amount, senderWallet, receiverWallet, tipAsset, tipAssetMultiplier, tipAccount);
+			let createClawbackTransactionTxSigned = createClawbackTransactionTx.signTxn(tipAccountMnemonic.sk);
+			let tx = await algodClient.sendRawTransaction(createClawbackTransactionTxSigned).do();
+			// Wait for transaction to be confirmed
+			let confirmedTxn = await algosdk.waitForConfirmation(algodClient, tx.txId, 6);
+			console.log(`## transaction success: round - ${confirmedTxn['confirmed-round']}, tx - ${tx.txId}`);
+			const embed = await CreateCustomEmbed(
+				`**${receiverUser.username}**. Say thanks to **${senderUser.username}** for sending a tip to you.`,
+				`**${senderUser}** sent ${receiverUser} ${amount} tokens.`,
+				`Tip sent`
+			);
+			await interaction.followUp({ embeds: [embed] });
+		} catch (error) {
+			console.error(error);
 			const embed = await CreateCustomEmbed(`Error:`, `> Receiver did not opt in.`, `register`);
 			await interaction.followUp({ embeds: [embed] });
-			return;
 		}
-		let createClawbackTransactionTx = await createClawbackTransaction(amount, senderWallet, receiverWallet, tipAsset, tipAssetMultiplier, tipAccount);
-		let createClawbackTransactionTxSigned = createClawbackTransactionTx.signTxn(tipAccountMnemonic.sk);
-		let tx = await algodClient.sendRawTransaction(createClawbackTransactionTxSigned).do();
-		// Wait for transaction to be confirmed
-		let confirmedTxn = await algosdk.waitForConfirmation(algodClient, tx.txId, 6);
-		console.log(`## transaction success: round - ${confirmedTxn['confirmed-round']}, tx - ${tx.txId}`);
-		const embed = await CreateCustomEmbed(
-			`**${receiverUser.username}**. Say thanks to **${senderUser.username}** for sending a tip to you.`,
-			`**${senderUser}** sent ${receiverUser} ${amount} tokens.`,
-			`Tip sent`
-		);
-		await interaction.followUp({ embeds: [embed] });
 	}
 };
