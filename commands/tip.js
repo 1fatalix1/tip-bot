@@ -106,7 +106,7 @@ module.exports = {
 		const amount = interaction.options.getInteger('amount');
 		const usersConfigSender = await UsersConfig.findOne({ where: { userId: interaction.user.id } });
 		if (!usersConfigSender) {
-			const embed = await CreateCustomEmbed(`Error:`, `> Sender not regeistered.\n> Please register first.`, `register`);
+			const embed = await CreateCustomEmbed(`Error:`, `> Sender not registered.\n> Please register first.`, `register`);
 			await interaction.followUp({ embeds: [embed] });
 			return;
 		}
